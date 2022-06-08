@@ -1,5 +1,4 @@
 import axios, {  AxiosError, AxiosResponse } from "axios";
-import { request } from "http";
 import { toast } from "react-toastify";
 import { history } from "../..";
 
@@ -16,8 +15,8 @@ axios.interceptors.response.use(async response =>{
 },(error:AxiosError)=>{
     const { data , status } :{ data :any; status : any} = error.response!;
     switch (status) {
-        case 400:           
-             if(data.errors){              
+        case 400:  
+             if(data.errors){                      
                  const modelStateErrors:string[] =[];
                  for (const key in data.errors) {
                      if(data.errors[key]){
@@ -26,10 +25,10 @@ axios.interceptors.response.use(async response =>{
                  }
             
                  throw modelStateErrors.flat();
-             }
+             }  
              toast.error(data.title);
             break;
-        case 401:
+        case 401 :
              toast.error(data.title!);
             break;
         case 500:
